@@ -247,6 +247,33 @@ export const UserDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         }))
       );
     })();
+    (async () => {
+
+  const { data, error } = await supabase
+    .from('continue_watching')
+    .select('*')
+    .eq('user_id', userId)
+    .order('updated_at', { ascending: false });
+
+  if (!active) return;
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  setContinueWatching(
+    (data || []).map(r => ({
+      id: r.anime_id,
+      title: r.title,
+      poster: r.poster,
+      episode: r.episode,
+      progress: r.progress,
+      updatedAt: r.updated_at,
+    }))
+  );
+
+})();
 
     // امتیازها از Supabase
     (async () => {
@@ -453,24 +480,70 @@ export const UserDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     persist({ watchlist: next });
   }, [watchlist, isLoggedIn, userId, persist]);
 
-  // Continue Watching
-  const updateContinueWatching = useCallback((item: Omit<ContinueItem, 'updatedAt'>) => {
+const updateContinueWatching = useCallback(async (item: Omit<ContinueItem, 'updatedAt'>) => {
+  if (isLoggedIn) {
+    const updatedAt = new Date().toISOString();
+
     setContinueWatching(prev => {
       const filtered = prev.filter(c => String(c.id) !== String(item.id));
-      const next = [{ ...item, updatedAt: new Date().toISOString() }, ...filtered];
-      persist({ continueWatching: next });
-      return next;
+      return [{ ...item, updatedAt }, ...filtered];
     });
-  }, [persist]);
 
-  const removeContinueWatching = useCallback((id: string | number) => {
-    setContinueWatching(prev => {
-      const next = prev.filter(c => String(c.id) !== String(id));
-      persist({ continueWatching: next });
-      return next;
-    });
-  }, [persist]);
+    const { error } = await supabase
+  .from('continue_watching')
+  .upsert(
+    {
+      user_id: userId,
+      anime_id: String(item.id),
+      title: item.title,
+      poster: item.poster,
+      episode: item.episode,
+      progress: item.progress,
+      updated_at: updatedAt,
+    },
+    {
+      onConflict: 'user_id,anime_id'
+    }
+  );
 
+if (error) console.error(error);
+
+    return;
+  }
+
+  setContinueWatching(prev => {
+    const filtered = prev.filter(c => String(c.id) !== String(item.id));
+    const next = [{ ...item, updatedAt: new Date().toISOString() }, ...filtered];
+    persist({ continueWatching: next });
+    return next;
+  });
+}, [isLoggedIn, userId, persist]);
+const removeContinueWatching = useCallback(async (id: string | number) => {
+
+  if (isLoggedIn) {
+
+    setContinueWatching(prev =>
+      prev.filter(c => String(c.id) !== String(id))
+    );
+
+    const { error } = await supabase
+      .from('continue_watching')
+      .delete()
+      .eq('user_id', userId)
+      .eq('anime_id', String(id));
+
+    if (error) console.error(error);
+
+    return;
+  }
+
+  setContinueWatching(prev => {
+    const next = prev.filter(c => String(c.id) !== String(id));
+    persist({ continueWatching: next });
+    return next;
+  });
+
+}, [isLoggedIn, userId, persist]);
   // Ratings
   const setRating = useCallback((item: Omit<RatingItem, 'ratedAt'>) => {
     if (isLoggedIn) {

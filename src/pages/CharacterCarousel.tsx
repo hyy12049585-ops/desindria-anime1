@@ -1,5 +1,5 @@
 import React from 'react';
-import HorizontalCarousel from './HorizontalCarousel';
+import HorizontalCarousel from '../features/common/HorizontalCarousel';
 import { Heart } from 'lucide-react';
 
 interface Character {

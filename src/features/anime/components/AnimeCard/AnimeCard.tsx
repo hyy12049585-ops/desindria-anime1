@@ -3,21 +3,8 @@ import { Link } from 'react-router-dom';
 import { Heart, Bookmark, Play, Star, Download } from 'lucide-react';
 import { useUserData } from '../../../../contexts/UserDataContext';
 import { useTheme } from '../../../../contexts/ThemeContext';
+import type { Anime } from '../../types/anime';
 
-interface Anime {
-  id: number;
-  title: string;
-  poster?: string;
-  image?: string;
-  score?: number;
-  rating?: number;
-  status?: string;
-  type?: string;
-  episodes?: number;
-  year?: number;
-  genre?: string[];
-  genres?: string[];
-}
 
 interface AnimeCardProps {
   anime: Anime;
