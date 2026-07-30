@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تشخیص باگ تم</title>
+<style>
+  body { font-family: Tahoma, sans-serif; background:#1a1a2e; color:#eee; padding:20px; line-height:1.9; }
+  h1 { color:#a855f7; }
+  .box { background:#0f0f23; border:1px solid #333; border-radius:10px; padding:16px; margin:14px 0; }
+  .ok { color:#4ade80; font-weight:bold; }
+  .bad { color:#f87171; font-weight:bold; }
+  .warn { color:#fbbf24; font-weight:bold; }
+  button { background:#a855f7; color:#fff; border:none; padding:14px 24px; border-radius:8px; font-size:16px; cursor:pointer; margin:6px; font-family:Tahoma; }
+  button:hover { background:#9333ea; }
+  pre { background:#000; padding:12px; border-radius:8px; overflow-x:auto; direction:ltr; text-align:left; font-size:13px; }
+  .item { padding:8px; border-bottom:1px solid #222; }
+  #report { margin-top:20px; }
+  .big { font-size:18px; }
+</style>
+</head>
+<body>
+<h1>🔍 ابزار تشخیص باگ تم</h1>
+<p>این صفحه را <b>در همان مرورگری که سایتت باز است</b> اجرا کن. دکمه‌ها را به ترتیب بزن.</p>
+
+<div class="box">
+  <p class="big">⚠️ مهم: این فایل باید روی <b>localhost:5173</b> اجرا شود تا به سایت دسترسی داشته باشد.</p>
+  <p>این فایل را در پوشه‌ی <code>public</code> پروژه بگذار، بعد برو به:<br>
+  <code style="color:#4ade80">localhost:5173/theme-debug.html</code></p>
+</div>
+
+<button onclick="runDiagnosis()">۱) تشخیص کامل بزن</button>
+<button onclick="forceLight()">۲) تست: به زور روشن کن</button>
+<button onclick="findDark()">۳) نقاط سیاه را پیدا کن</button>
+
+<div id="report"></div>
+
+<script>
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls)e.className=cls; if(html)e.innerHTML=html; return e; }
+function log(html, cls){ const r=document.getElementById('report'); r.appendChild(el('div','item '+(cls||''), html)); }
+function clear(){ document.getElementById('report').innerHTML=''; }
+
+function runDiagnosis(){
+  clear();
+  log('<h2>📋 نتیجه‌ی تشخیص:</h2>');
+
+  // 1) آیا روی صفحه‌ی درست هستیم؟
+  if(location.port !== '5173'){
+    log('❌ این صفحه روی پورت ' + (location.port||'؟') + ' اجرا شده، نه 5173!', 'bad');
+    log('باید فایل را در پوشه‌ی <b>public</b> پروژه بگذاری و از طریق <b>localhost:5173/theme-debug.html</b> بازش کنی. وگرنه این تست به سایت دسترسی ندارد.', 'warn');
+    return;
+  }
+  log('✅ روی پورت 5173 هستیم.', 'ok');
+
+  const html = document.documentElement;
+  const cls = html.className;
+
+  // 2) کلاس html
+  log('<b>کلاس‌های &lt;html&gt;:</b> <code>' + (cls||'(خالی)') + '</code>');
+  const hasLight = html.classList.contains('light') || html.classList.contains('theme-light');
+  const hasDark = html.classList.contains('dark') || html.classList.contains('theme-dark');
+  if(hasLight) log('✅ کلاس تم روشن (light) روی html هست.', 'ok');
+  else if(hasDark) log('⚠️ الان تم تاریک فعال است (کلاس dark). اول دکمه‌ی خورشید را در سایت بزن تا روشن شود، بعد دوباره این تست را بزن.', 'warn');
+  else log('❌ هیچ کلاس تمی روی html نیست! یعنی ThemeContext کلاس را اعمال نمی‌کند.', 'bad');
+
+  // 3) متغیرها
+  const s = getComputedStyle(html);
+  const vars = ['--bg-primary','--body-bg','--bg-card','--text-primary'];
+  log('<b>مقدار متغیرهای CSS:</b>');
+  let varsLight = true;
+  vars.forEach(v=>{
+    const val = s.getPropertyValue(v).trim();
+    const isLight = isLightColor(val);
+    log('&nbsp;&nbsp;<code>'+v+'</code> = <code>'+(val||'(تعریف نشده)')+'</code> ' + (isLight?'✅ روشن':'❌ تیره'), isLight?'ok':'bad');
+    if(!isLight && hasLight) varsLight=false;
+  });
+
+  // 4) رنگ واقعی body
+  const bodyBg = getComputedStyle(document.body).backgroundColor;
+  log('<b>رنگ واقعی body:</b> <code>'+bodyBg+'</code> ' + (isLightColor(bodyBg)?'✅':'❌'), isLightColor(bodyBg)?'ok':'bad');
+
+  // 5) نتیجه‌گیری نهایی
+  log('<h2>🎯 نتیجه‌گیری:</h2>');
+  if(hasLight && varsLight && isLightColor(bodyBg)){
+    log('✅✅ تم روشن کاملاً کار می‌کند! اگر هنوز جایی سیاه می‌بینی، آن یک <b>عکس تیره</b> است یا یک کلاس خاص که باید جدا پیدا شود (دکمه ۳ را بزن).', 'ok');
+  } else if(hasLight && !varsLight){
+    log('❌ کلاس light روی html هست ولی <b>متغیرها تیره مانده‌اند</b>. یعنی فایل CSS تم روشن لود نشده یا override نمی‌شود. مشکل از index.css / ترتیب لود است.', 'bad');
+  } else if(hasDark){
+    log('⚠️ تم تاریک فعال است. اول در سایت تم را روشن کن.', 'warn');
+  } else if(!hasLight && !hasDark){
+    log('❌ ThemeContext اصلاً کلاس را روی html نمی‌گذارد. مشکل از ThemeContext یا اینکه ThemeProvider دور اپ نیست.', 'bad');
+  }
+
+  // 6) چک کن چند فایل CSS لود شده
+  log('<h2>📦 فایل‌های CSS لودشده:</h2>');
+  const sheets = [...document.styleSheets];
+  log('تعداد stylesheet: <b>'+sheets.length+'</b>');
+  let foundLightRule = false;
+  sheets.forEach(sh=>{
+    try {
+      const rules = [...(sh.cssRules||[])];
+      rules.forEach(r=>{
+        if(r.selectorText && (r.selectorText.includes('html.light')||r.selectorText.includes('.light'))){
+          foundLightRule = true;
+        }
+      });
+    } catch(e){ /* cross-origin */ }
+  });
+  log(foundLightRule ? '✅ قانون‌های مربوط به .light در CSS پیدا شد.' : '❌ هیچ قانون .light در CSS لودشده پیدا نشد! یعنی فایل تم لود نشده.', foundLightRule?'ok':'bad');
+}
+
+function isLightColor(c){
+  if(!c) return false;
+  const m = c.match(/\d+/g);
+  if(!m) return c.includes('#f')||c.includes('#e')||c.includes('white');
+  // اگر هگز
+  if(c[0]==='#'){
+    const hex=c.slice(1);
+    const r=parseInt(hex.slice(0,2),16), g=parseInt(hex.slice(2,4),16), b=parseInt(hex.slice(4,6),16);
+    return (r+g+b)/3 > 130;
+  }
+  return (parseInt(m[0])+parseInt(m[1])+parseInt(m[2]))/3 > 130;
+}
+
+function forceLight(){
+  clear();
+  const html=document.documentElement;
+  html.classList.remove('dark','theme-dark');
+  html.classList.add('light','theme-light');
+  html.style.setProperty('--bg-primary','#f5f3ff','important');
+  html.style.setProperty('--body-bg','#f5f3ff','important');
+  html.style.setProperty('--bg-card','#ffffff','important');
+  html.style.setProperty('--text-primary','#0f172a','important');
+  document.body.style.background='#f5f3ff';
+  log('✅ به زور تم روشن اعمال شد. حالا برگرد به تب سایت و نگاه کن:', 'ok');
+  log('• اگر سایت روشن شد → مشکل فقط از <b>اعمال‌نشدن کلاس/متغیر</b> بود و با فایل CSS درست حل می‌شود.', 'warn');
+  log('• اگر هنوز سیاه ماند → مشکل از <b>رنگ‌های هاردکدِ خود کامپوننت‌ها</b> است (نه متغیر).', 'warn');
+  log('<br>⚠️ توجه: این فقط روی همین صفحه‌ی دیباگ اثر دارد، نه تب سایت. برای تست واقعی باید این فایل داخل خود سایت باشد.', 'warn');
+}
+
+function findDark(){
+  clear();
+  log('<h2>🖤 نقاط سیاهِ صفحه:</h2>');
+  const all=[...document.querySelectorAll('*')];
+  const darks=[];
+  all.forEach(e=>{
+    const c=getComputedStyle(e).backgroundColor;
+    const m=c.match(/\d+/g);
+    if(m && +m[0]<45 && +m[1]<45 && +m[2]<45 && c!=='rgba(0, 0, 0, 0)' && (m[3]===undefined || +m[3]>0.5)){
+      darks.push(e);
+    }
+  });
+  if(darks.length===0){ log('✅ هیچ المان با پس‌زمینه‌ی سیاه پیدا نشد!', 'ok'); return; }
+  log('تعداد المان‌های سیاه: <b>'+darks.length+'</b>');
+  log('<b>۱۵ تای اول (کلاس‌هایشان):</b>');
+  darks.slice(0,15).forEach((e,i)=>{
+    e.style.outline='3px solid red';
+    const tag=e.tagName.toLowerCase();
+    const cls=(e.className&&e.className.toString().slice(0,80))||'(بدون کلاس)';
+    log((i+1)+') &lt;'+tag+'&gt; <code>'+cls+'</code>');
+  });
+  log('<br>✅ این المان‌ها با قاب قرمز مشخص شدند. اسکرین‌شات همین لیست را بفرست.', 'ok');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+/* ─── باکس "ورود لازم است" ──────────────────────── */
+.comment-auth-required {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 32px 20px;
+  text-align: center;
+}
+.comment-auth-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.comment-auth-text {
+  color: #aaa;
+  margin: 0 0 16px;
+  font-size: 14px;
+}
+.comment-auth-button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.comment-auth-button:hover {
+  opacity: 0.9;
+}
+/* ─── فرم کامنت ─────────────────────────────────── */
+.comment-form {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+}
+.comment-form.is-reply {
+  margin-top: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.comment-form-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.comment-form-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.comment-form-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.avatar-fallback {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+.comment-form-username {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+.comment-form-textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+.comment-form-textarea:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+}
+.comment-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+.comment-btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.comment-btn-cancel {
+  background: transparent;
+  color: #aaa;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.comment-btn-cancel:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+.comment-btn-submit {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+}
+.comment-btn-submit:hover:not(:disabled) {
+  opacity: 0.9;
+}
+.comment-btn-submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

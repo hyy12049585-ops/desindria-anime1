@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پیدا کردن لایه‌ی سیاه</title>
+<style>
+  body{font-family:Tahoma;background:#16213e;color:#eee;padding:20px;line-height:2}
+  h1{color:#a855f7}
+  .card{background:#0f3460;border-radius:12px;padding:18px;margin:14px 0}
+  button{background:#e94560;color:#fff;border:none;padding:18px 28px;border-radius:10px;font-size:17px;cursor:pointer;font-family:Tahoma;width:100%;margin:8px 0}
+  button:hover{opacity:.9}
+  .res{background:#000;padding:14px;border-radius:8px;margin-top:14px;direction:ltr;text-align:left;font-size:13px;white-space:pre-wrap;word-break:break-all}
+  .black{color:#f87171;font-weight:bold}
+  .light{color:#4ade80}
+  .step{background:#533483;padding:14px;border-radius:8px;margin:10px 0}
+  code{background:#000;padding:2px 6px;border-radius:4px;color:#4ade80}
+</style>
+</head>
+<body>
+<h1>🔍 پیدا کردن لایه‌ی سیاه</h1>
+
+<div class="step">
+<b>روش استفاده:</b><br>
+۱) این فایل را در پوشه‌ی <code>public</code> پروژه بگذار.<br>
+۲) اول برو به صفحه‌ی <code>localhost:5173/anime</code> (همان که سیاه است) و تم را روشن کن.<br>
+۳) بعد <b>در همین تب</b>، آدرس را به <code>localhost:5173/find-black.html</code> عوض کن.<br>
+۴) دکمه‌ی پایین را بزن.
+</div>
+
+<div class="card">
+<b>⚠️ مشکل:</b> این فایل وقتی باز می‌شود، صفحه‌ی سایت دیگر آنجا نیست (صفحه عوض شده). پس به‌جای این، روش زیر را استفاده کن که <b>iframe</b> سایت را داخل خودش بارگذاری می‌کند:
+</div>
+
+<button onclick="loadSite()">۱) سایت را اینجا بارگذاری کن</button>
+<button onclick="scan()">۲) لایه‌های سیاه را پیدا کن</button>
+
+<div id="result" class="res">منتظر...</div>
+
+<iframe id="site" src="/anime" style="width:100%;height:500px;border:2px solid #a855f7;border-radius:10px;margin-top:14px;background:#fff"></iframe>
+
+<script>
+function loadSite(){
+  const f=document.getElementById('site');
+  f.src='/anime';
+  document.getElementById('result').textContent='سایت در حال بارگذاری... ۳ ثانیه صبر کن بعد دکمه ۲ را بزن.';
+}
+
+function scan(){
+  const out=document.getElementById('result');
+  out.innerHTML='';
+  let doc;
+  try {
+    doc = document.getElementById('site').contentDocument;
+  } catch(e){
+    out.innerHTML='<span class="black">❌ نمی‌توان به iframe دسترسی داشت. مطمئن شو این فایل هم روی localhost:5173 باز است.</span>';
+    return;
+  }
+  if(!doc || !doc.body){
+    out.innerHTML='<span class="black">❌ سایت هنوز لود نشده. چند ثانیه صبر کن و دوباره دکمه ۲ را بزن.</span>';
+    return;
+  }
+
+  const win = document.getElementById('site').contentWindow;
+  const htmlCls = doc.documentElement.className;
+  let report = '═══ گزارش ═══\n';
+  report += 'کلاس html: ' + htmlCls + '\n\n';
+
+  // همه‌ی المان‌ها را بگرد، آنهایی که پس‌زمینه‌ی سیاه دارند
+  const all = doc.querySelectorAll('*');
+  const blacks = [];
+  all.forEach(el=>{
+    const bg = win.getComputedStyle(el).backgroundColor;
+    const m = bg.match(/[\d.]+/g);
+    if(m && +m[0]<55 && +m[1]<55 && +m[2]<55 && bg!=='rgba(0, 0, 0, 0)' && (m[3]===undefined || +m[3]>0.4)){
+      const rect = el.getBoundingClientRect();
+      // فقط المان‌های بزرگ (پس‌زمینه‌ها، نه دکمه‌های ریز)
+      if(rect.width > 200 && rect.height > 100){
+        blacks.push({el, bg, w:Math.round(rect.width), h:Math.round(rect.height)});
+        el.style.outline = '4px solid red';
+      }
+    }
+  });
+
+  if(blacks.length===0){
+    report += '✅ هیچ لایه‌ی سیاهِ بزرگی پیدا نشد!\nیعنی پس‌زمینه روشن است و آنچه می‌بینی عکس است.';
+    out.innerHTML = '<span class="light">'+report+'</span>';
+    return;
+  }
+
+  report += '🖤 تعداد لایه‌های سیاهِ بزرگ: ' + blacks.length + '\n\n';
+  report += '═══ این‌ها مقصرند (با قاب قرمز در سایت پایین) ═══\n\n';
+  blacks.forEach((b,i)=>{
+    const tag = b.el.tagName.toLowerCase();
+    let cls = (b.el.className && b.el.className.toString) ? b.el.className.toString() : String(b.el.className||'');
+    cls = cls.slice(0,120);
+    report += (i+1)+') <'+tag+'>\n';
+    report += '   کلاس: '+(cls||'(بدون کلاس)')+'\n';
+    report += '   رنگ: '+b.bg+'  اندازه: '+b.w+'×'+b.h+'\n\n';
+  });
+  report += '\n📸 از این متن اسکرین‌شات بگیر و بفرست.';
+  out.innerHTML = '<span class="black">'+report.replace(/</g,'&lt;').replace(/&lt;span/g,'<span').replace(/&lt;\/span/g,'</span')+'</span>';
+}
+</script>
+</body>
+</html>

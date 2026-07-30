@@ -1,0 +1,219 @@
+/* ═══════════════════════════════════════════════════════════
+   مرحله ۰ — تعریف قطعی متغیرهای تم روشن (بالاترین اولویت)
+   خارج از @layer و روی html.light تا حتماً برنده شوند.
+   این همان چیزی است که bg-[var(--bg-primary)] را روشن می‌کند.
+   ═══════════════════════════════════════════════════════════ */
+html.light,
+html.theme-light {
+  --neon-cyan: #0891b2;
+  --neon-purple: #7c3aed;
+  --neon-pink: #db2777;
+  --neon-blue: #2563eb;
+
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-navbar: rgba(255, 255, 255, 0.9);
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f3ff;
+  --bg-hover: rgba(0, 0, 0, 0.04);
+  --bg-input: rgba(0, 0, 0, 0.05);
+
+  --body-bg: #f5f3ff;
+  --body-gradient: linear-gradient(180deg, #f5f3ff 0%, #ede9fe 50%, #e8e4f8 100%);
+
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(139, 92, 246, 0.5);
+
+  --text-primary: #0f172a;
+  --text-secondary: rgba(0, 0, 0, 0.65);
+  --text-muted: rgba(0, 0, 0, 0.4);
+
+  --accent: #7c3aed;
+  --accent-secondary: #0891b2;
+  --accent-glow: rgba(124, 58, 237, 0.15);
+
+  --theme-color: #0891b2;
+}
+/* ═══════════════════════════════════════════════════════════
+   Theme Fixes — اصلاح سراسری رنگ‌های هاردکد در تم روشن
+   این فایل فقط در تم روشن (.light) رنگ‌های ثابت Tailwind را
+   به رنگ‌های خوانا override می‌کند. تم تاریک دست نمی‌خورد.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ───────── متن سفید هاردکد → متن تیره‌ی خوانا ───────── */
+.light .text-white {
+  color: var(--text-primary) !important;
+}
+
+/* درجات شفافیت متن سفید (text-white/40 و...) → متن کم‌رنگ تم */
+.light [class*="text-white/"] {
+  color: var(--text-secondary) !important;
+}
+
+/* خاکستری‌های روشنِ متن که روی پس‌زمینه‌ی روشن محو می‌شوند */
+.light .text-gray-300,
+.light .text-gray-400,
+.light .text-slate-300,
+.light .text-slate-400 {
+  color: var(--text-secondary) !important;
+}
+
+.light .text-gray-500,
+.light .text-slate-500,
+.light .text-gray-600 {
+  color: var(--text-muted) !important;
+}
+
+/* ───────── پس‌زمینه‌های تیره‌ی هاردکد → کارت/سطح تم ───────── */
+.light .bg-gray-800,
+.light .bg-gray-900,
+.light .bg-gray-950,
+.light .bg-slate-800,
+.light .bg-slate-900 {
+  background-color: var(--bg-card) !important;
+}
+
+.light .bg-gray-700,
+.light .bg-slate-700 {
+  background-color: var(--bg-card-hover) !important;
+}
+
+/* نسخه‌های شفافِ پس‌زمینه‌ی تیره (bg-gray-800/50 و...) */
+.light [class*="bg-gray-800/"],
+.light [class*="bg-gray-900/"],
+.light [class*="bg-slate-800/"],
+.light [class*="bg-slate-900/"] {
+  background-color: var(--bg-card) !important;
+}
+
+/* ───────── پس‌زمینه‌ی سفیدِ شفاف روی تم تاریک‌محور ─────────
+   bg-white/5 و bg-white/10 در تم روشن تقریباً نامرئی‌اند؛
+   به یک سطح ملایم تبدیلشان می‌کنیم. */
+.light .bg-white\/5,
+.light .bg-white\/\[0\.03\],
+.light .bg-white\/10 {
+  background-color: var(--bg-hover) !important;
+}
+
+/* بوردرهای سفیدِ شفاف که در تم روشن دیده نمی‌شوند */
+.light .border-white\/5,
+.light .border-white\/10,
+.light .border-white\/20 {
+  border-color: var(--border-color) !important;
+}
+
+/* ───────── ورودی‌ها و placeholderها ───────── */
+.light .placeholder-gray-500::placeholder,
+.light .placeholder-gray-600::placeholder {
+  color: var(--text-muted) !important;
+}
+/* ═══════════════════════════════════════════════════════════
+   مرحله ۲ — اصلاح پس‌زمینه‌های تیره‌ی هاردکد (رنگ ثابت/hex)
+   ═══════════════════════════════════════════════════════════ */
+
+/* پس‌زمینه‌های هگزِ تیره که مستقیم در کلاس آمده‌اند */
+.light .bg-\[\#050505\],
+.light .bg-\[\#0b0b12\],
+.light .bg-\[\#0a0f1e\],
+.light .bg-\[\#070b18\],
+.light .bg-black {
+  background-color: var(--bg-primary) !important;
+}
+
+/* gray-50 که فقط در حالت dark تیره می‌شد — در تم روشن همان روشن بماند */
+.light .bg-gray-50 {
+  background-color: var(--bg-primary) !important;
+}
+
+/* رنگ متن تیره‌ی هاردکد (text-gray-900/950) در تم روشن درست است،
+   اما اگر روی پس‌زمینه‌ی روشن قرار گیرد مشکلی ندارد — دست نمی‌زنیم */
+
+/* ───────── پس‌زمینه‌ی اصلی صفحه ─────────
+   بعضی صفحه‌ها bg-[var(--bg-primary)] دارند؛ مطمئن می‌شویم
+   خود متغیر در تم روشن، روشن است (override تأکیدی). */
+.light,
+.light body {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+}
+
+/* کارت‌های تیره‌ی شفاف که در تم روشن خاکستری‌محو می‌شوند */
+.light .bg-black\/20,
+.light .bg-black\/40,
+.light .bg-black\/50,
+.light .bg-black\/60 {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+/* فوتر — اصلاح متن‌های white/opacity در حالت روشن */
+.theme-light footer .text-white\/30,
+.light footer .text-white\/30 {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
+.theme-light footer .text-white\/20,
+.light footer .text-white\/20 {
+  color: rgba(0, 0, 0, 0.45) !important;
+}
+
+.theme-light footer .border-white\/5,
+.light footer .border-white\/5 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+.light footer .text-white\/30,
+.theme-light footer .text-white\/30,
+.light footer .text-white\/20,
+.theme-light footer .text-white\/20 {
+  color: var(--text-secondary) !important;
+}
+
+.light footer .border-white\/5,
+.theme-light footer .border-white\/5 {
+  border-color: var(--border-color) !important;
+}
+/* فوتر در حالت روشن */
+html.light footer .text-white\/30,  html.theme-light footer .text-white\/30,
+html.light footer .text-white\/20,  html.theme-light footer .text-white\/20,
+html.light footer .text-white\/40,  html.theme-light footer .text-white\/40 {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+html.light footer .text-white,  html.theme-light footer .text-white {
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+html.light footer .border-white\/5,  html.theme-light footer .border-white\/5,
+html.light footer .border-white\/10, html.theme-light footer .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+/* ═══ override گرادیان‌های تیره در تم روشن ═══ */
+.light [class*="from-["],
+.light [class*="to-["],
+.light [class*="via-["],
+.light [class*="bg-gradient"] {
+  background-image: none !important;
+}
+
+/* فوتر و سکشن‌های تیره — هر hex تیره‌ای که جا مونده */
+.light footer,
+.light .bg-\[\#020617\],
+.light .bg-\[\#0f172a\],
+.light .bg-\[\#111\],
+.light .bg-\[\#000\],
+.light .bg-\[\#0d0d12\],
+.light .bg-\[\#080810\] {
+  background-color: var(--bg-secondary) !important;
+  background-image: none !important;
+}
+
+/* تست بصری موقت — اگر فوتر قرمز شد یعنی selector درست گرفت */
+.light footer {
+  outline: 4px solid red !important;
+}
+html.light body,
+html.theme-light body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+html.light body,
+html.theme-light body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}

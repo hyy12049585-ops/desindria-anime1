@@ -1,0 +1,320 @@
+@import "tailwindcss";
+@import "vazirmatn/Vazirmatn-font-face.css";
+
+/* ═══════════════════════════════════════════════════════════
+   ⚡ بنیاد تم (Tailwind v4)
+   dark: را به کلاس .dark وصل می‌کنیم — نه به prefers-color-scheme سیستم‌عامل.
+   بدون این خط، تمام dark:* ها به تنظیم OS گوش می‌دهند و تاگل سایت کار نمی‌کند.
+   ═══════════════════════════════════════════════════════════ */
+@custom-variant dark (&:where(.dark, .theme-dark, .dark *, .theme-dark *));
+
+/* متغیرهای خام را به‌صورت توکن واقعی Tailwind در دسترس می‌گذاریم.
+   inline یعنی در رانتایم با var() حل می‌شود، پس با تعویض تم زنده آپدیت می‌شود.
+   از این به بعد در کامپوننت‌ها به‌جای رنگ هاردکد بنویس:
+     bg-surface  text-fg  text-fg-muted  border-border  text-accent ... */
+@theme inline {
+  --font-sans: "Vazirmatn", sans-serif;
+
+  --color-surface:    var(--bg-card);
+  --color-surface-2:  var(--bg-card-hover);
+  --color-base:       var(--bg-primary);
+  --color-fg:         var(--text-primary);
+  --color-fg-muted:   var(--text-secondary);
+  --color-fg-subtle:  var(--text-muted);
+  --color-border:     var(--border-color);
+  --color-accent:     var(--accent);
+  --color-accent-2:   var(--accent-secondary);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   متغیرهای تم تاریک (پیش‌فرض)
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --neon-cyan: #00eaff;
+  --neon-purple: #bf00ff;
+  --neon-pink: #ff00aa;
+  --neon-blue: #3b82f6;
+
+  --bg-primary: #05050f;
+  --bg-secondary: #0a0a1e;
+  --bg-navbar: rgba(5, 5, 15, 0.85);
+  --bg-card: #0a0a1e;
+  --bg-card-hover: #10102a;
+  --bg-hover: rgba(255, 255, 255, 0.06);
+  --bg-input: rgba(255, 255, 255, 0.07);
+
+  --body-bg: #02000a;
+  --body-gradient: radial-gradient(ellipse at top, #0d0025 0%, #050010 50%, #02000a 100%);
+
+  --border-color: rgba(0, 234, 255, 0.12);
+  --border-hover: rgba(139, 92, 246, 0.4);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-muted: rgba(255, 255, 255, 0.35);
+
+  --accent: #a855f7;
+  --accent-secondary: #00eaff;
+  --accent-glow: rgba(168, 85, 247, 0.25);
+  --theme-color: #22d3ee;
+
+  /* ارتفاع نوار — تنها منبع حقیقت برای فاصلهٔ زیر نوار */
+  --navbar-h: 68px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   متغیرهای تم روشن — html.light / html.theme-light
+   ═══════════════════════════════════════════════════════════ */
+html.light,
+html.theme-light {
+  --neon-cyan: #0891b2;
+  --neon-purple: #7c3aed;
+  --neon-pink: #db2777;
+  --neon-blue: #2563eb;
+
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-navbar: rgba(255, 255, 255, 0.9);
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f3ff;
+  --bg-hover: rgba(0, 0, 0, 0.04);
+  --bg-input: rgba(0, 0, 0, 0.05);
+
+  --body-bg: #f5f3ff;
+  --body-gradient: linear-gradient(180deg, #f5f3ff 0%, #ede9fe 50%, #e8e4f8 100%);
+
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(139, 92, 246, 0.5);
+
+  --text-primary: #0f172a;
+  --text-secondary: rgba(0, 0, 0, 0.65);
+  --text-muted: rgba(0, 0, 0, 0.4);
+
+  --accent: #7c3aed;
+  --accent-secondary: #0891b2;
+  --accent-glow: rgba(124, 58, 237, 0.15);
+  --theme-color: #0891b2;
+}
+
+* {
+  font-family: "Vazirmatn", sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BODY — یک قانون واحد. متغیرها خودشان per-theme سوییچ می‌کنند،
+   پس دیگر نیازی به سه تعریف !important متناقض نیست.
+   ═══════════════════════════════════════════════════════════ */
+body {
+  background-color: var(--body-bg);
+  background-image: var(--body-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  direction: rtl;
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   فاصلهٔ سراسری از نوار ناوبریِ شناور (fixed)
+   چون navbar حالت fixed دارد و از جریان صفحه خارج است، بدون این
+   فاصله، محتوای همهٔ صفحات زیر آن می‌رود. این یک‌بار همه‌جا را درست می‌کند.
+   ═══════════════════════════════════════════════════════════ */
+#root {
+  padding-top: var(--navbar-h);
+}
+@media (max-width: 1023px) {
+  #root {
+    padding-top: 64px; /* ارتفاع navbar در موبایل (h-16) */
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   ⚠️ لایهٔ سازگاری موقت (LEGACY)
+   این override ها رنگ‌های تیرهٔ هاردکدِ کامپوننت‌های قدیمی را در لایت‌مود
+   جبران می‌کنند. هکی‌اند اما الان load-bearing. هنگام رفکتور هر کامپوننت،
+   رنگ‌های هاردکد را با توکن (bg-surface/text-fg) جایگزین کن و این بلوک
+   را قدم‌به‌قدم خالی کن. نهایتاً کل این بخش باید حذف شود.
+   ═══════════════════════════════════════════════════════════ */
+html.light [class*="bg-[#0"], html.theme-light [class*="bg-[#0"],
+html.light [class*="bg-[#1"], html.theme-light [class*="bg-[#1"] {
+  background-color: var(--bg-card) !important;
+}
+html.light .bg-black, html.theme-light .bg-black,
+html.light [class*="bg-gray-7"], html.theme-light [class*="bg-gray-7"],
+html.light [class*="bg-gray-8"], html.theme-light [class*="bg-gray-8"],
+html.light [class*="bg-gray-9"], html.theme-light [class*="bg-gray-9"],
+html.light [class*="bg-slate-8"], html.theme-light [class*="bg-slate-8"],
+html.light [class*="bg-slate-9"], html.theme-light [class*="bg-slate-9"],
+html.light [class*="bg-zinc-9"], html.theme-light [class*="bg-zinc-9"],
+html.light [class*="bg-neutral-9"], html.theme-light [class*="bg-neutral-9"] {
+  background-color: var(--bg-card) !important;
+}
+html.light [class*="text-white"]:not([style*="color"]),
+html.theme-light [class*="text-white"]:not([style*="color"]) {
+  color: var(--text-primary) !important;
+}
+html.light .text-gray-300, html.theme-light .text-gray-300,
+html.light .text-gray-400, html.theme-light .text-gray-400,
+html.light .text-gray-500, html.theme-light .text-gray-500 {
+  color: var(--text-secondary) !important;
+}
+html.light [class*="bg-white/"], html.theme-light [class*="bg-white/"],
+html.light [class*="bg-black/"], html.theme-light [class*="bg-black/"] {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+html.light [class*="border-white/"], html.theme-light [class*="border-white/"],
+html.light [class*="border-gray-7"], html.theme-light [class*="border-gray-7"],
+html.light [class*="border-gray-8"], html.theme-light [class*="border-gray-8"] {
+  border-color: var(--border-color) !important;
+}
+
+/* ───────────────────────────────────────────────────────────
+   استثناء هیرو: بنر روی عکس است، پس در هر دو تم متن سفید + scrim
+   تیره می‌ماند تا همیشه خوانا باشد. این بلوک، .hero-banner را از
+   override های لایت‌مود معاف می‌کند.
+   ─────────────────────────────────────────────────────────── */
+html.light .hero-banner [class*="text-white"],
+html.theme-light .hero-banner [class*="text-white"] {
+  color: #ffffff !important;
+}
+html.light .hero-banner .hero-scrim,
+html.theme-light .hero-banner .hero-scrim,
+html.light .hero-banner [class*="from-black"],
+html.theme-light .hero-banner [class*="from-black"] {
+  background-color: initial !important;
+}
+html.light .hero-banner [class*="bg-white/"],
+html.theme-light .hero-banner [class*="bg-white/"] {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+html.light .hero-banner [class*="border-white/"],
+html.theme-light .hero-banner [class*="border-white/"] {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   کامپوننت‌های نئونی
+   ═══════════════════════════════════════════════════════════ */
+.anime-card {
+  background: linear-gradient(135deg, rgba(10, 5, 30, 0.95) 0%, rgba(5, 0, 20, 0.98) 100%);
+  border: 1px solid rgba(0, 234, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 234, 255, 0.25), 0 0 30px rgba(191, 0, 255, 0.15), inset 0 0 20px rgba(0, 234, 255, 0.04);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+.anime-card:hover {
+  border-color: rgba(0, 234, 255, 0.7);
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.5), 0 0 50px rgba(191, 0, 255, 0.3), 0 0 80px rgba(255, 0, 170, 0.15);
+  transform: translateY(-6px) scale(1.02);
+}
+.anime-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00eaff, #bf00ff, transparent);
+  opacity: 0.8;
+}
+.anime-card:focus, .anime-card:active, .anime-card:focus-visible {
+  outline: none;
+}
+
+html.light .anime-card, html.theme-light .anime-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+}
+html.light .anime-card:hover, html.theme-light .anime-card:hover {
+  border-color: rgba(139, 92, 246, 0.5) !important;
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.12) !important;
+}
+html.light .anime-card::before, html.theme-light .anime-card::before {
+  background: linear-gradient(90deg, transparent, #7c3aed, #0891b2, transparent) !important;
+  opacity: 0.5 !important;
+}
+
+.glass {
+  background: rgba(10, 5, 30, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 234, 255, 0.15);
+}
+html.light .glass, html.theme-light .glass {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.neon-text-cyan { color: #00eaff; text-shadow: 0 0 10px rgba(0, 234, 255, 0.8); }
+html.light .neon-text-cyan, html.theme-light .neon-text-cyan { color: var(--accent-secondary); text-shadow: none; }
+.neon-text-pink { color: #ff00aa; text-shadow: 0 0 10px rgba(255, 0, 170, 0.8); }
+html.light .neon-text-pink, html.theme-light .neon-text-pink { color: #db2777; text-shadow: none; }
+
+.navbar-bg {
+  background-color: var(--bg-navbar);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(20px) saturate(180%);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* ═══════════════════════════════════════════════════════════
+   Scrollbar و Utilities
+   ═══════════════════════════════════════════════════════════ */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #bf00ff, #00eaff); border-radius: 10px; }
+html.light ::-webkit-scrollbar-thumb, html.theme-light ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #a78bfa, #67e8f9);
+}
+
+.theme-accent { color: var(--theme-color); }
+.theme-bg { background-color: var(--theme-color); }
+
+/* ═══════════════════════════════════════════════════════════
+   Animations
+   ═══════════════════════════════════════════════════════════ */
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+@keyframes fade-in-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-6px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } }
+.animate-shake { animation: shake 0.4s ease-in-out; }
+@keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
+.ripple-effect { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.35); transform: scale(0); animation: ripple-anim 0.6s linear; pointer-events: none; }
+@keyframes commentFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.comment-fade-in { animation: commentFadeIn 0.25s ease-out both; }
+
+/* ═══════════════════════════════════════════════════════════
+   نیوترالایزر امنِ لایت‌مود (جایگزینِ بلوک دیباگ خطرناک)
+   رنگ‌های تیرهٔ هاردکد را خنثی می‌کند، اما نوار و هیرو را معاف
+   می‌کند تا شیشه‌ای/بی‌رنگ نشوند.
+   ⚠️ دیگر هرگز نسخهٔ بدونِ :not(nav) را اضافه نکن.
+   ═══════════════════════════════════════════════════════════ */
+html.light *:not(nav):not(.hero-banner):not(.hero-banner *):not(.hero-scrim):not(.admin-root):not(.admin-root *):not(.dl-root):not(.dl-root *):not(.themed-page):not(.themed-page *),
+html.theme-light *:not(nav):not(.hero-banner):not(.hero-banner *):not(.hero-scrim):not(.admin-root):not(.admin-root *):not(.dl-root):not(.dl-root *):not(.themed-page):not(.themed-page *) {
+  background-color: transparent !important;
+}
+
+/* تضمین پس‌زمینهٔ نوار — حتی اگر جایی نیوتر شود */
+html.light nav[class*="fixed"],
+html.theme-light nav[class*="fixed"] {
+  background-color: var(--bg-navbar) !important;
+}
+
+/* بدنه روشن */
+html.light body,
+html.theme-light body {
+  background: #f5f3ff !important;
+}

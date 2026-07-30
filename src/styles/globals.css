@@ -1,0 +1,463 @@
+/* src/styles/globals.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   فونت نستعلیق برای لوگو
+   ============================================ */
+@font-face {
+  font-family: 'IranNastaliq';
+  src: url('/fonts/IranNastaliq.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  /* ============================================
+     🌙 تم تاریک (پیش‌فرض)
+     ============================================ */
+  :root {
+    --neon-cyan: #22d3ee;
+    --neon-purple: #a855f7;
+    --neon-pink: #ec4899;
+    --neon-blue: #3b82f6;
+
+     --bg-primary: #0a0a1a;
+  --bg-secondary: #0b0b1a;
+  --bg-card: #111827;
+  --bg-input: #15151c;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.6);
+  --border-color: #2a2a35;
+    --text-primary: #f1f0f5;
+    --text-secondary: #a09bb0;
+    --text-muted: #6b6580;
+
+    --border-color: rgba(139, 92, 246, 0.1);
+    --accent: #a855f7;
+    --accent-secondary: #22d3ee;
+
+    --shadow-color: rgba(0, 0, 0, 0.5);
+  }
+
+  /* ============================================
+     ☀️ تم روشن
+     ============================================ */
+  .theme-light {
+    --neon-cyan: #0891b2;
+    --neon-purple: #7c3aed;
+    --neon-pink: #db2777;
+    --neon-blue: #2563eb;
+
+   --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-input: #f0f0f0;
+  --text-primary: #1a1a2e;
+  --text-secondary: #555555;
+  --border-color: #e0e0e0;
+
+    --text-primary: #1a1235;
+    --text-secondary: #5b5675;
+    --text-muted: #9490a5;
+
+    --border-color: rgba(124, 58, 237, 0.12);
+    --accent: #7c3aed;
+    --accent-secondary: #0891b2;
+
+    --shadow-color: rgba(124, 58, 237, 0.08);
+  }
+
+  /* ============================================
+     کارت‌های انیمه — تم‌ریسپانسیو
+     ============================================ */
+  .anime-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .anime-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(168, 85, 247, 0.12);
+  }
+
+  .theme-light .anime-card {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .theme-light .anime-card:hover {
+    box-shadow: 0 12px 40px rgba(124, 58, 237, 0.1);
+  }
+
+  /* ============================================
+     تایپوگرافی باکیفیت
+     ============================================ */
+  .anime-card-title {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+  }
+
+  .anime-card-meta {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  .genre-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 8px;
+    background: rgba(168, 85, 247, 0.12);
+    color: var(--accent);
+    transition: all 0.2s ease;
+  }
+
+  .theme-light .genre-badge {
+    background: rgba(124, 58, 237, 0.08);
+    color: var(--accent);
+  }
+
+  /* ============================================
+     Line Clamp
+     ============================================ */
+  .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* ============================================
+     لوگو
+     ============================================ */
+  .logo-text {
+    font-family: 'IranNastaliq', 'Vazirmatn', serif;
+    background: linear-gradient(135deg, #c084fc 0%, #a855f7 40%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 8px rgba(168, 85, 247, 0.3));
+  }
+
+  .theme-light .logo-text {
+    background: linear-gradient(135deg, #9333ea 0%, #7c3aed 40%, #6d28d9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 1px 4px rgba(124, 58, 237, 0.15));
+  }
+
+  .logo-icon {
+    background: linear-gradient(135deg, #a855f7 0%, #7c3aed 50%, #6d28d9 100%);
+    box-shadow: 0 0 24px 4px rgba(168, 85, 247, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.18);
+  }
+
+  .theme-light .logo-icon {
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  }
+
+  /* ============================================
+     Navbar — تم‌ریسپانسیو
+     ============================================ */
+  .navbar-bg {
+    background-color: var(--bg-navbar);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(20px) saturate(180%);
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .navbar-bg.scrolled {
+    box-shadow: 0 4px 30px var(--shadow-color);
+  }
+
+  .btn-login {
+    background: linear-gradient(135deg, #a855f7, #7c3aed, #6366f1);
+    color: #fff;
+    box-shadow: 0 4px 25px rgba(168, 85, 247, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .btn-login:hover {
+    box-shadow: 0 6px 35px rgba(168, 85, 247, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .theme-light .btn-login {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9, #4f46e5);
+    box-shadow: 0 4px 25px rgba(124, 58, 237, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .theme-light .btn-login:hover {
+    box-shadow: 0 6px 35px rgba(124, 58, 237, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  .navbar-icon-btn {
+    color: var(--text-secondary);
+    border-radius: 12px;
+    padding: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .navbar-icon-btn:hover {
+    background-color: var(--bg-hover);
+    color: var(--accent);
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* ============================================
+   اسکرول‌بار — تم‌ریسپانسیو
+   ============================================ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #8b5cf6, #06b6d4);
+  border-radius: 10px;
+}
+
+.theme-light ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #a78bfa, #67e8f9);
+}
+
+/* ============================================
+   انیمیشن‌ها
+   ============================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.6; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.15); }
+  50% { box-shadow: 0 0 35px rgba(168, 85, 247, 0.3); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* =============================================
+   ☀️ LIGHT THEME — GLOBAL OVERRIDES
+   ============================================= */
+
+/* --- بدنه اصلی صفحه --- */
+.theme-light body,
+.light body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* --- سکشن‌ها و main شفاف --- */
+.theme-light section,
+.theme-light main,
+.theme-light article,
+.theme-light aside {
+  background-color: transparent !important;
+}
+
+/* --- بک‌گراند‌های تاریک ثابت → bg-card --- */
+.theme-light div[class*="bg-[#0"],
+.theme-light div[class*="bg-[#1"],
+.theme-light div[class*="bg-[#2"],
+.light div[class*="bg-[#0"],
+.light div[class*="bg-[#1"],
+.light div[class*="bg-[#2"] {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+.theme-light [class*="bg-black"]:not([class*="bg-black/"]),
+.light [class*="bg-black"]:not([class*="bg-black/"]) {
+  background-color: var(--bg-card) !important;
+}
+
+.theme-light div[class*="bg-gray-8"],
+.theme-light div[class*="bg-gray-9"],
+.theme-light div[class*="bg-slate-8"],
+.theme-light div[class*="bg-slate-9"],
+.light div[class*="bg-gray-8"],
+.light div[class*="bg-gray-9"],
+.light div[class*="bg-slate-8"],
+.light div[class*="bg-slate-9"] {
+  background-color: var(--bg-card) !important;
+}
+
+/* --- min-h-screen با بک‌گراند تاریک --- */
+.theme-light [class*="min-h-screen"][class*="bg-"] {
+  background-color: transparent !important;
+}
+
+/* --- متن‌های سفید ثابت → تاریک --- */
+.theme-light [class*="text-white"]:not([class*="text-white/"]) {
+  color: var(--text-primary) !important;
+}
+
+/* --- متن سفید با opacity --- */
+.theme-light .text-white\/70,
+.theme-light .text-white\/80,
+.theme-light .text-white\/90 {
+  color: var(--text-primary) !important;
+}
+
+.theme-light .text-white\/40,
+.theme-light .text-white\/50,
+.theme-light .text-white\/60 {
+  color: var(--text-secondary) !important;
+}
+
+.theme-light .text-white\/10,
+.theme-light .text-white\/20,
+.theme-light .text-white\/25,
+.theme-light .text-white\/30 {
+  color: var(--text-muted) !important;
+}
+
+/* --- متن‌های خاکستری روشن --- */
+.theme-light [class*="text-gray-3"],
+.theme-light [class*="text-gray-4"] {
+  color: var(--text-primary) !important;
+}
+
+.theme-light [class*="text-gray-5"] {
+  color: var(--text-secondary) !important;
+}
+
+/* --- بردرها --- */
+.theme-light [class*="border-[#"],
+.theme-light [class*="border-gray-7"],
+.theme-light [class*="border-gray-8"],
+.theme-light [class*="border-white/"] {
+  border-color: var(--border-color) !important;
+}
+
+/* --- بک‌گراندهای شیشه‌ای --- */
+.theme-light [class*="bg-white/5"],
+.theme-light [class*="bg-white/10"],
+.theme-light [class*="bg-white/[0.0"] {
+  background-color: rgba(124, 58, 237, 0.04) !important;
+}
+
+/* --- backdrop-blur --- */
+.theme-light [class*="backdrop-blur"] {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* --- اینپوت‌ها و فرم‌ها --- */
+.theme-light input,
+.theme-light textarea,
+.theme-light select {
+  background-color: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.theme-light input::placeholder,
+.theme-light textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* --- فوتر --- */
+.theme-light footer,
+.theme-light footer * {
+  color: var(--text-secondary) !important;
+}
+
+.theme-light footer [class*="border-"] {
+  border-color: var(--border-color) !important;
+}
+
+.theme-light footer [class*="bg-[#"] {
+  background-color: var(--bg-secondary) !important;
+}
+
+/* --- سایه‌ها ملایم‌تر --- */
+.theme-light [class*="shadow"] {
+  --tw-shadow-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* --- گرادیانت‌های نئون ملایم‌تر --- */
+.theme-light [class*="from-purple"][class*="to-cyan"],
+.theme-light [class*="from-cyan"][class*="to-purple"] {
+  opacity: 0.85;
+}
+
+/* --- progress bar / vote bar بک‌گراند --- */
+.theme-light [class*="bg-gray-7"],
+.theme-light [class*="bg-gray-8"]:not(div[class*="bg-gray-8"]) {
+  background-color: #e8e4f0 !important;
+}
+
+/* --- حفظ رنگ دکمه‌های اصلی --- */
+.theme-light .btn-login,
+.theme-light [class*="bg-purple-"],
+.theme-light [class*="bg-cyan-"],
+.theme-light [class*="bg-orange-"],
+.theme-light [class*="bg-green-"],
+.theme-light [class*="bg-red-"],
+.theme-light [class*="bg-gradient"] {
+  color: #ffffff !important;
+}
+
+/* --- badge و rating --- */
+.theme-light [class*="bg-black/60"],
+.theme-light [class*="bg-black/40"],
+.theme-light [class*="bg-black/50"] {
+  background-color: rgba(0, 0, 0, 0.55) !important;
+  color: #ffffff !important;
+}
+.theme-light [class*="bg-black/60"] *,
+.theme-light [class*="bg-black/40"] *,
+.theme-light [class*="bg-black/50"] * {
+  color: #ffffff !important;
+}
+
+.theme-light [class*="bg-orange-500"] {
+  color: #ffffff !important;
+}
+
+/* --- hover states --- */
+.theme-light a:hover,
+.theme-light button:hover {
+  color: var(--accent) !important;
+}
+
+/* --- نظرسنجی و کارت‌های ویژه --- */
+.theme-light [class*="rounded"][class*="bg-[#0"],
+.theme-light [class*="rounded"][class*="bg-[#1"] {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* --- ring colors --- */
+.theme-light [class*="ring-white/"],
+.theme-light [class*="ring-[#"] {
+  --tw-ring-color: var(--border-color) !important;
+}

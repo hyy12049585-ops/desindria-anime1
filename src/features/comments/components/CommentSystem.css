@@ -1,0 +1,62 @@
+/* ─── ریشه ─────────────────────────────────────── */
+.comment-system {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16162a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  font-family: "Vazirmatn", "Tahoma", sans-serif;
+}
+.comment-system.theme-light {
+  background: #fff;
+  border-color: #e5e7eb;
+  color: #1f2937;
+}
+/* ─── هدر ──────────────────────────────────────── */
+.comment-system-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.comment-system-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.comment-count {
+  color: #888;
+  font-size: 14px;
+  font-weight: 400;
+}
+.comment-sort-select {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.comment-sort-select option {
+  background: #1a1a2e;
+  color: #fff;
+}
+/* ─── لیست ─────────────────────────────────────── */
+.comment-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.comment-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  font-size: 14px;
+}

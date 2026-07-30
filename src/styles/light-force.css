@@ -1,0 +1,80 @@
+/* ═══════════════════════════════════════════════════════════
+   light-force.css
+   در تم روشن، هر سطح تیره‌ای را به زور روشن می‌کند.
+   این فایل آخرین لایه است و بر همه‌چیز غلبه می‌کند.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ---- ۱) متغیرهای تم روشن (قطعی) ---- */
+html.light, html.theme-light {
+  --bg-primary: #f5f3ff !important;
+  --bg-secondary: #ffffff !important;
+  --bg-card: #ffffff !important;
+  --bg-card-hover: #f3f0ff !important;
+  --bg-navbar: rgba(255,255,255,0.92) !important;
+  --bg-hover: rgba(0,0,0,0.04) !important;
+  --bg-input: rgba(0,0,0,0.05) !important;
+  --body-bg: #f5f3ff !important;
+  --border-color: rgba(0,0,0,0.1) !important;
+  --text-primary: #0f172a !important;
+  --text-secondary: rgba(0,0,0,0.65) !important;
+  --text-muted: rgba(0,0,0,0.45) !important;
+  --shadow-color: rgba(0,0,0,0.08) !important;
+}
+
+/* ---- ۲) پس‌زمینه‌ی کلی صفحه و body ---- */
+html.light body, html.theme-light body {
+  background: #f5f3ff !important;
+  color: #0f172a !important;
+}
+
+/* ---- ۳) هر کلاس پس‌زمینه‌ی تیره‌ی هاردکد → سفید ---- */
+html.light [class*="bg-gray-7"],  html.theme-light [class*="bg-gray-7"],
+html.light [class*="bg-gray-8"],  html.theme-light [class*="bg-gray-8"],
+html.light [class*="bg-gray-9"],  html.theme-light [class*="bg-gray-9"],
+html.light [class*="bg-slate-7"], html.theme-light [class*="bg-slate-7"],
+html.light [class*="bg-slate-8"], html.theme-light [class*="bg-slate-8"],
+html.light [class*="bg-slate-9"], html.theme-light [class*="bg-slate-9"],
+html.light [class*="bg-zinc-8"],  html.theme-light [class*="bg-zinc-8"],
+html.light [class*="bg-zinc-9"],  html.theme-light [class*="bg-zinc-9"],
+html.light [class*="bg-neutral-8"], html.theme-light [class*="bg-neutral-8"],
+html.light [class*="bg-neutral-9"], html.theme-light [class*="bg-neutral-9"],
+html.light .bg-black, html.theme-light .bg-black {
+  background-color: #ffffff !important;
+}
+
+/* ---- ۴) پس‌زمینه‌های هگزِ تیره‌ی دلخواه (arbitrary) → سفید ---- */
+html.light [class*="bg-[#0"],  html.theme-light [class*="bg-[#0"],
+html.light [class*="bg-[#1"],  html.theme-light [class*="bg-[#1"],
+html.light [class*="bg-[rgb"], html.theme-light [class*="bg-[rgb"] {
+  background-color: #ffffff !important;
+}
+
+/* ---- ۵) کارت انیمه / glass ---- */
+html.light .anime-card, html.theme-light .anime-card,
+html.light .glass, html.theme-light .glass {
+  background: #ffffff !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+
+/* ---- ۶) متن سفیدِ هاردکد → تیره ---- */
+html.light .text-white, html.theme-light .text-white {
+  color: #0f172a !important;
+}
+
+/* ---- ۷) سطوح و بوردرهای سفیدِ شفاف (که در تم روشن نامرئی‌اند) ---- */
+html.light [class*="bg-white/"],   html.theme-light [class*="bg-white/"] {
+  background-color: rgba(0,0,0,0.04) !important;
+}
+html.light [class*="border-white/"], html.theme-light [class*="border-white/"] {
+  border-color: rgba(0,0,0,0.12) !important;
+}
+
+/* ---- ۸) پس‌زمینه‌های مشکیِ شفاف (bg-black/30 ...) ---- */
+html.light [class*="bg-black/"], html.theme-light [class*="bg-black/"] {
+  background-color: rgba(0,0,0,0.04) !important;
+}
+
+/* ---- ۹) فوتر ---- */
+html.light footer, html.theme-light footer {
+  background: #ffffff !important;
+}

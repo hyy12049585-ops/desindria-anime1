@@ -1,0 +1,6 @@
+/* src/styles/fonts.css */
+@font-face {
+  font-family: 'IranNastaliq';
+  src: url('/fonts/IranNastaliq.woff2') format('woff2');
+  font-display: swap;
+}

@@ -1,0 +1,235 @@
+/* src/styles/profile.css */
+
+/* ══════════════════════════════════════════
+   DESINDRIA ANIME — CYBER NEON PROFILE THEME
+   ══════════════════════════════════════════ */
+
+:root {
+  /* ── Neon Colors ── */
+  --neon-blue: #00d4ff;
+  --neon-purple: #a855f7;
+  --neon-pink: #ff2d78;
+  --neon-cyan: #06ffd2;
+  --neon-orange: #ff6a00;
+  --neon-green: #39ff14;
+
+  /* ── Gradients ── */
+  --gradient-blue-purple: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+  --gradient-pink-purple: linear-gradient(135deg, #ff2d78 0%, #a855f7 100%);
+  --gradient-cyan-blue: linear-gradient(135deg, #06ffd2 0%, #00d4ff 100%);
+  --gradient-dark: linear-gradient(180deg, #0a0a1a 0%, #0f0f2e 50%, #0a0a1a 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+
+  /* ── Glass ── */
+  --glass-bg: rgba(15, 15, 46, 0.6);
+  --glass-bg-light: rgba(255, 255, 255, 0.04);
+  --glass-bg-hover: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(0, 212, 255, 0.3);
+  --glass-blur: 20px;
+
+  /* ── Backgrounds ── */
+  --bg-primary: #060614;
+  --bg-secondary: #0a0a1f;
+  --bg-tertiary: #0f0f2e;
+  --bg-card: rgba(15, 15, 46, 0.65);
+  --bg-card-hover: rgba(15, 15, 46, 0.85);
+  --bg-input: rgba(10, 10, 31, 0.8);
+
+  /* ── Text ── */
+  --text-primary: #f0f0f5;
+  --text-secondary: #a0a0c0;
+  --text-muted: #6a6a8a;
+  --text-neon: #00d4ff;
+  --text-accent: #a855f7;
+
+  /* ── Shadows ── */
+  --shadow-neon-blue: 0 0 15px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.1);
+  --shadow-neon-purple: 0 0 15px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.1);
+  --shadow-neon-pink: 0 0 15px rgba(255, 45, 120, 0.3), 0 0 40px rgba(255, 45, 120, 0.1);
+  --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.4);
+  --shadow-glow-sm: 0 0 8px rgba(0, 212, 255, 0.2);
+  --shadow-glow-md: 0 0 20px rgba(0, 212, 255, 0.25);
+  --shadow-glow-lg: 0 0 40px rgba(0, 212, 255, 0.3);
+
+  /* ── Border ── */
+  --border-neon: 1px solid rgba(0, 212, 255, 0.25);
+  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+  --border-radius-full: 9999px;
+
+  /* ── Spacing ── */
+  --sidebar-width: 280px;
+  --sidebar-collapsed-width: 80px;
+  --header-height: 70px;
+
+  /* ── Transitions ── */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Typography ── */
+  --font-main: 'Vazirmatn', 'Inter', -apple-system, sans-serif;
+  --font-display: 'Rajdhani', 'Orbitron', 'Vazirmatn', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ══════════════ KEYFRAMES ══════════════ */
+
+@keyframes neonPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes neonGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.3),
+                0 0 15px rgba(0, 212, 255, 0.15),
+                0 0 30px rgba(0, 212, 255, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5),
+                0 0 25px rgba(0, 212, 255, 0.25),
+                0 0 50px rgba(0, 212, 255, 0.1);
+  }
+}
+
+@keyframes neonBorderGlow {
+  0%, 100% { border-color: rgba(0, 212, 255, 0.25); }
+  50% { border-color: rgba(0, 212, 255, 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(-30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes rotateGlow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes progressFill {
+  0% { width: 0%; }
+}
+
+@keyframes borderDance {
+  0%, 100% {
+    border-image-source: linear-gradient(0deg, #00d4ff, #a855f7);
+  }
+  25% {
+    border-image-source: linear-gradient(90deg, #00d4ff, #a855f7);
+  }
+  50% {
+    border-image-source: linear-gradient(180deg, #00d4ff, #a855f7);
+  }
+  75% {
+    border-image-source: linear-gradient(270deg, #00d4ff, #a855f7);
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% { text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+  50% { text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(0, 212, 255, 0.3); }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 0.5; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* ══════════════ SCROLLBAR ══════════════ */
+
+.profile-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.profile-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 15, 46, 0.3);
+  border-radius: 10px;
+}
+
+.profile-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d4ff, #a855f7);
+  border-radius: 10px;
+}
+
+.profile-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #33ddff, #b86dfa);
+}
+
+/* ══════════════ UTILITY CLASSES ══════════════ */
+
+.neon-text-blue { color: var(--neon-blue); text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+.neon-text-purple { color: var(--neon-purple); text-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
+.neon-text-pink { color: var(--neon-pink); text-shadow: 0 0 10px rgba(255, 45, 120, 0.5); }
+
+.glass-effect {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: var(--border-glass);
+}
+
+.neon-border {
+  border: var(--border-neon);
+  animation: neonBorderGlow 3s ease-in-out infinite;
+}
+
+.float-animation {
+  animation: floatUp 0.6s ease-out forwards;
+}
+
+.scale-animation {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+/* ══════════════ HORIZONTAL SCROLL ══════════════ */
+
+.horizontal-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-track {
+  background: rgba(15, 15, 46, 0.2);
+  border-radius: 10px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background: var(--gradient-blue-purple);
+  border-radius: 10px;
+}

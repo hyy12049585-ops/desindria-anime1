@@ -1,0 +1,418 @@
+Folder PATH listing
+Volume serial number is 18F8-6526
+C:\USERS\MAZIAR\DESINDRIA-ANIME1\SRC
+¦   App.css
+¦   App.tsx
+¦   DebugTheme.tsx
+¦   env.d.ts
+¦   index.css
+¦   main.tsx
+¦   
++---app
++---assets
+¦       hero.png
+¦       react.svg
+¦       vite.svg
+¦       
++---components
+¦   ¦   DebugTheme.tsx
+¦   ¦   ErrorBoundary.tsx
+¦   ¦   ProtectedRoute.tsx
+¦   ¦   
+¦   +---Auth
+¦   ¦       AuthBackground.tsx
+¦   ¦       AuthButton.tsx
+¦   ¦       AuthInput.tsx
+¦   ¦       
+¦   +---Cinderino
+¦   ¦       CinderinoCanvasInvite.tsx
+¦   ¦       CinderinoCanvasLauncher.tsx
+¦   ¦       CinderinoChallengeCard.tsx
+¦   ¦       CinderinoChallengesCarousel.tsx
+¦   ¦       CinderinoChallengeSection.tsx
+¦   ¦       CinderinoCollabCanvas.tsx
+¦   ¦       CinderinoCommentSection.tsx
+¦   ¦       CinderinoFeed.tsx
+¦   ¦       CinderinoFollowersModal.tsx
+¦   ¦       CinderinoPostCard.tsx
+¦   ¦       CinderinoProfileHeader.tsx
+¦   ¦       CinderinoProfileTabs.tsx
+¦   ¦       CinderinoStoryBar.tsx
+¦   ¦       CinderinoStoryViewer.tsx
+¦   ¦       CreatePostModal.tsx
+¦   ¦       EditCinderinoProfileModal.tsx
+¦   ¦       
+¦   +---common
+¦   ¦   ¦   ViewAllPage.tsx
+¦   ¦   ¦   
+¦   ¦   +---Logo
+¦   ¦           Logo.tsx
+¦   ¦           
+¦   +---Filter
+¦   ¦       FilterCheckbox.tsx
+¦   ¦       FilterPill.tsx
+¦   ¦       FilterSection.tsx
+¦   ¦       FilterSidebar.tsx
+¦   ¦       GenreList.tsx
+¦   ¦       PopularAnime.tsx
+¦   ¦       SortOptions.tsx
+¦   ¦       StudioSearch.tsx
+¦   ¦       YearRangeSlider.tsx
+¦   ¦       
+¦   +---layout
+¦   ¦   ¦   SearchBar.tsx
+¦   ¦   ¦   
+¦   ¦   +---Footer
+¦   ¦   ¦       Footer.tsx
+¦   ¦   ¦       
+¦   ¦   +---Navbar
+¦   ¦   ¦       Navbar.tsx
+¦   ¦   ¦       
+¦   ¦   +---Shell
+¦   ¦           Shell.tsx
+¦   ¦           
+¦   +---Profile
+¦   ¦   ¦   Achievements.tsx
+¦   ¦   ¦   ActivityFeed.tsx
+¦   ¦   ¦   AnimeCard.tsx
+¦   ¦   ¦   AnimeRecommendations.tsx
+¦   ¦   ¦   AvatarUploader.tsx
+¦   ¦   ¦   ContinueWatching.tsx
+¦   ¦   ¦   EditProfileModal.tsx
+¦   ¦   ¦   GlassCard.tsx
+¦   ¦   ¦   ImageCropper.tsx
+¦   ¦   ¦   NeonButton.tsx
+¦   ¦   ¦   NeonInput.tsx
+¦   ¦   ¦   NeonProgressBar.tsx
+¦   ¦   ¦   NeonToggle.tsx
+¦   ¦   ¦   PageHeader.tsx
+¦   ¦   ¦   ProfileCard.tsx
+¦   ¦   ¦   ProfileHeader.tsx
+¦   ¦   ¦   ProfileLayout.tsx
+¦   ¦   ¦   ProfileOverview.tsx
+¦   ¦   ¦   ProfileSidebar.tsx
+¦   ¦   ¦   ProfileStats.tsx
+¦   ¦   ¦   SakuraPetals.tsx
+¦   ¦   ¦   SectionTitle.tsx
+¦   ¦   ¦   SkeletonLoader.tsx
+¦   ¦   ¦   ToggleSwitch.tsx
+¦   ¦   ¦   Watchlist.tsx
+¦   ¦   ¦   
+¦   ¦   +---tabs
+¦   ¦           AchievementsBadgesTab.tsx
+¦   ¦           ActivityTimeline.tsx
+¦   ¦           AnimeStatsTab.tsx
+¦   ¦           CharactersTab.tsx
+¦   ¦           ContinueTab.tsx
+¦   ¦           DashboardTab.tsx
+¦   ¦           DownloadsTab.tsx
+¦   ¦           EditProfileTab.tsx
+¦   ¦           FavoriteCharactersTab.tsx
+¦   ¦           FavoritesTab.tsx
+¦   ¦           LevelSystemTab.tsx
+¦   ¦           NotificationsTab.tsx
+¦   ¦           RatingsTab.tsx
+¦   ¦           ReviewsTab.tsx
+¦   ¦           SecurityTab.tsx
+¦   ¦           SettingsTab.tsx
+¦   ¦           ToggleSwitch.tsx
+¦   ¦           WatchlistTab.tsx
+¦   ¦           
+¦   +---shared
+¦   ¦       Logo.tsx
+¦   ¦       SectionTitle.tsx
+¦   ¦       
+¦   +---ui
+¦           AnimeCard.tsx
+¦           Avatar.tsx
+¦           Badge.tsx
+¦           Button.tsx
+¦           EmptyState.tsx
+¦           GlassCard.tsx
+¦           Input.tsx
+¦           ProgressBar.tsx
+¦           SearchBar.tsx
+¦           SectionHeader.tsx
+¦           SkeletonCard.tsx
+¦           SkeletonLoader.tsx
+¦           ToggleSwitch.tsx
+¦           
++---constants
+¦       index.ts
+¦       MusicPlayerContext.tsx
+¦       navigation.ts
+¦       
++---contexts
+¦       AuthContext.tsx
+¦       AuthUserContext.tsx
+¦       CinderinoProfileContext.tsx
+¦       CinderinoProfileHeader.tsx
+¦       GlobalMusicContext.tsx
+¦       ProfileContext.tsx
+¦       SettingsContext.tsx
+¦       ThemeContext.tsx
+¦       useNotificationSystem.ts
+¦       UserContext.tsx
+¦       UserDataContext.tsx
+¦       
++---data
+¦       animationData.ts
+¦       cinderinoChallenge.ts
+¦       cinderinoData.ts
+¦       cinderinoStories.ts
+¦       communityData.ts
+¦       mockData.ts
+¦       newsData.ts
+¦       
++---features
+¦   +---animation
+¦   ¦   +---components
+¦   ¦   ¦       AnimationCard.tsx
+¦   ¦   ¦       
+¦   ¦   +---pages
+¦   +---anime
+¦   ¦   +---components
+¦   ¦   ¦   ¦   AnimeHeader.tsx
+¦   ¦   ¦   ¦   AnimeMeta.tsx
+¦   ¦   ¦   ¦   AnimeSynopsis.tsx
+¦   ¦   ¦   ¦   EpisodeList.tsx
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---AnimeCard
+¦   ¦   ¦           AnimeCard.tsx
+¦   ¦   ¦           
+¦   ¦   +---hooks
+¦   ¦   ¦       AnimeDetail.ts
+¦   ¦   ¦       useAnimeDetail.ts
+¦   ¦   ¦       
+¦   ¦   +---Pages
+¦   ¦   ¦       AnimePage.tsx
+¦   ¦   ¦       
+¦   ¦   +---services
+¦   ¦   ¦       anime.api.ts
+¦   ¦   ¦       
+¦   ¦   +---types
+¦   ¦           anime.ts
+¦   ¦           anime.types.ts
+¦   ¦           
+¦   +---comments
+¦   ¦   ¦   index.ts
+¦   ¦   ¦   
+¦   ¦   +---components
+¦   ¦   ¦       CommentActions.tsx
+¦   ¦   ¦       CommentForm.css
+¦   ¦   ¦       CommentForm.tsx
+¦   ¦   ¦       CommentHeader.tsx
+¦   ¦   ¦       CommentInput.tsx
+¦   ¦   ¦       CommentItem.css
+¦   ¦   ¦       CommentItem.tsx
+¦   ¦   ¦       CommentList.tsx
+¦   ¦   ¦       CommentSort.tsx
+¦   ¦   ¦       CommentsSection.tsx
+¦   ¦   ¦       CommentStats.tsx
+¦   ¦   ¦       CommentSystem.css
+¦   ¦   ¦       CommentSystem.tsx
+¦   ¦   ¦       ReplyInput.tsx
+¦   ¦   ¦       ReplyItem.tsx
+¦   ¦   ¦       UnifiedCommentSystem.tsx
+¦   ¦   ¦       
+¦   ¦   +---hooks
+¦   ¦   ¦       getCurrentAccountName.ts
+¦   ¦   ¦       useComments.ts
+¦   ¦   ¦       useCurrentUser.ts
+¦   ¦   ¦       
+¦   ¦   +---services
+¦   ¦   ¦       commentStorage.ts
+¦   ¦   ¦       
+¦   ¦   +---types
+¦   ¦   ¦       comment.types.ts
+¦   ¦   ¦       comments.ts
+¦   ¦   ¦       types.ts
+¦   ¦   ¦       
+¦   ¦   +---utils
+¦   ¦           account.ts
+¦   ¦           author.ts
+¦   ¦           comments.ts
+¦   ¦           commentStorage.ts
+¦   ¦           commentTree.ts
+¦   ¦           format.ts
+¦   ¦           utils.ts
+¦   ¦           
+¦   +---common
+¦   ¦       BookmarkButton.tsx
+¦   ¦       CharacterCarousel.tsx
+¦   ¦       CommunityReviews.tsx
+¦   ¦       DownloadButton.tsx
+¦   ¦       HorizontalCarousel.tsx
+¦   ¦       LikeButton.tsx
+¦   ¦       ViewAllPage.tsx
+¦   ¦       
+¦   +---home
+¦   ¦   +---components
+¦   ¦       ¦   AnimeReels.tsx
+¦   ¦       ¦   AnimeRow.tsx
+¦   ¦       ¦   CharactersSection.tsx
+¦   ¦       ¦   ExclusiveDubs.tsx
+¦   ¦       ¦   Footer.tsx
+¦   ¦       ¦   HeroBanner.tsx
+¦   ¦       ¦   LatestMusic.tsx
+¦   ¦       ¦   LatestNews.tsx
+¦   ¦       ¦   LatestUpdates.tsx
+¦   ¦       ¦   OfficialChannels.tsx
+¦   ¦       ¦   PopularCharacters.tsx
+¦   ¦       ¦   ReviewsSection.tsx
+¦   ¦       ¦   SmartSuggestions.tsx
+¦   ¦       ¦   TopCharacters.tsx
+¦   ¦       ¦   TopReviews.tsx
+¦   ¦       ¦   UserComments.tsx
+¦   ¦       ¦   WeeklyPoll.tsx
+¦   ¦       ¦   
+¦   ¦       +---sections
+¦   ¦               GenreSection.tsx
+¦   ¦               HeroSection.tsx
+¦   ¦               PopularSection.tsx
+¦   ¦               SmartSuggestionsSection.tsx
+¦   ¦               TrendingSection.tsx
+¦   ¦               UserReviewsSection.tsx
+¦   ¦               
+¦   +---music
+¦   ¦   +---user
+¦   ¦       +---components
+¦   ¦       ¦       AddToPlaylistButton.tsx
+¦   ¦       ¦       DownloadButton.tsx
+¦   ¦       ¦       GlobalMusicPlayer.tsx
+¦   ¦       ¦       ListeningStats.tsx
+¦   ¦       ¦       MusicCard.tsx
+¦   ¦       ¦       MusicSidebar.tsx
+¦   ¦       ¦       PlaylistManager.tsx
+¦   ¦       ¦       RecentlyPlayed.tsx
+¦   ¦       ¦       SmartPlaylistGenerator.tsx
+¦   ¦       ¦       UserMusicPage.tsx
+¦   ¦       ¦       UserSidebar.tsx
+¦   ¦       ¦       
+¦   ¦       +---data
+¦   ¦       ¦       musicData.ts
+¦   ¦       ¦       playlistData.ts
+¦   ¦       ¦       
+¦   ¦       +---pages
+¦   ¦               MusicDetailPage.tsx
+¦   ¦               MusicPage.tsx
+¦   ¦               PlaylistDetailPage.tsx
+¦   ¦               UserMusicPage.tsx
+¦   ¦               
+¦   +---news
+¦   ¦   +---components
+¦   ¦   ¦       NewsCard.tsx
+¦   ¦   ¦       NewsFilters.tsx
+¦   ¦   ¦       NewsHero.tsx
+¦   ¦   ¦       NewsSidebar.tsx
+¦   ¦   ¦       
+¦   ¦   +---pages
+¦   ¦   ¦       NewsDetailPage.tsx
+¦   ¦   ¦       NewsPage.tsx
+¦   ¦   ¦       
+¦   ¦   +---types
+¦   ¦           news.types.ts
+¦   ¦           
+¦   +---polls
+¦   ¦   +---components
+¦   ¦           CharacterPoll.tsx
+¦   ¦           index.ts
+¦   ¦           PollsSection.tsx
+¦   ¦           WeeklyPoll.tsx
+¦   ¦           
+¦   +---search
+¦       +---components
+¦               SearchBar.tsx
+¦               
++---hooks
+¦       useAnimeStats.ts
+¦       useDebounce.ts
+¦       useDragReorder.ts
+¦       useDragScroll.ts
+¦       useFilter.ts
+¦       useLocalStorage.ts
+¦       useMediaQuery.ts
+¦       useMusicActivity.ts
+¦       useNewsUserData.ts
+¦       useNotificationSystem.ts
+¦       useOutsideClick.ts
+¦       useProfileAPI.ts
+¦       useRecommendationEngine.ts
+¦       useSearch.ts
+¦       useSlider.ts
+¦       
++---pages
+¦   ¦   ActivityFeed.tsx
+¦   ¦   AnimationDetailsPage.tsx
+¦   ¦   AnimationListPage.tsx
+¦   ¦   AnimeCategoryPage.tsx
+¦   ¦   AnimeDetailsPage.tsx
+¦   ¦   AnimeListPage.tsx
+¦   ¦   CategoryPage.tsx
+¦   ¦   CharacterCarousel.tsx
+¦   ¦   HomePage.tsx
+¦   ¦   MusicPage.tsx
+¦   ¦   PollsSection.tsx
+¦   ¦   ProfilePage.tsx
+¦   ¦   SearchPage.tsx
+¦   ¦   WatchPage.tsx
+¦   ¦   
+¦   +---Auth
+¦   ¦       ForgotPasswordPage.tsx
+¦   ¦       LoginPage.tsx
+¦   ¦       OTPPage.tsx
+¦   ¦       RegisterPage.tsx
+¦   ¦       ResetPasswordPage.tsx
+¦   ¦       TermsPage.tsx
+¦   ¦       
+¦   +---Cinderino
+¦           CinderinoChallengesPage.tsx
+¦           CinderinoPage.tsx
+¦           CinderinoProfilePage.tsx
+¦           
++---services
+¦   ¦   search.api.ts
+¦   ¦   
+¦   +---api
+¦           apiClient.ts
+¦           authApi.ts
+¦           
++---store
+¦       authStore.ts
+¦       storage.ts
+¦       userStore.ts
+¦       
++---styles
+¦       auth.css
+¦       fonts.css
+¦       globals.css
+¦       light-force.css
+¦       profile.css
+¦       theme-fixes.css
+¦       
++---types
+¦       api.ts
+¦       auth.types.ts
+¦       cinderino.ts
+¦       comment.types.ts
+¦       community.types.ts
+¦       filter.types.ts
+¦       index.ts
+¦       profile.ts
+¦       search.types.ts
+¦       
++---utils
+¦       cinderinoStorage.ts
+¦       cn.ts
+¦       commentHelpers.ts
+¦       dataManager.ts
+¦       formatters.ts
+¦       oEnglishDigits.ts
+¦       storage.ts
+¦       toEnglishDigits.ts
+¦       xpSystem.ts
+¦       
++---validations
+        profileSchemas.ts
+        useLocalStorage.ts
+        
